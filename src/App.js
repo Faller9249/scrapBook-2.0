@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './config/theme';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persitor, store } from './store';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <Provider store={store}>
+            <PersistGate persistor={persitor}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline/>
+                    <Routes/>
+                </ThemeProvider>
+            </PersistGate>
+        </Provider>
+    );
 }
-
-export default App;
